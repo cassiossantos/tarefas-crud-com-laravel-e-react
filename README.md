@@ -2,7 +2,7 @@
 
 Uma aplicação para fins de demonstração usando os conceitos de API REST.
 
->Etapas
+><h2>Etapas</h2>
 
 Vá até um respositório de sua escolha e digite 
 ````
