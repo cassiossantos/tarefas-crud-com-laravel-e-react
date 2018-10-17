@@ -1,6 +1,6 @@
 # tarefas-crud-com-laravel-e-react
-
-Uma aplicação para fins de demonstração usando os conceitos de API REST.
+ 
+Uma aplicação para fins de demonstração usando ReactJS e Laravel.
 
 ><h2>Etapas</h2>
 
