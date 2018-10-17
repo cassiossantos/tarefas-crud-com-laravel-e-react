@@ -16,6 +16,9 @@ $ cd tarefas-crud-com-laravel-e-react
 $ composer install
 ````
 ````
+#configure seu banco de dados em .env.example
+````
+````
 #gere uma chave 
 $ php artisan key:generate
 ````
