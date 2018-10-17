@@ -2,4 +2,4 @@
 
 Uma aplicação para fins de demonstração usando os conceitos de API REST.
 
-<img src='./resources/images/home.png'>
+<img src='/resources/images/home.png'>
