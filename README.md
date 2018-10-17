@@ -16,7 +16,7 @@ $ cd tarefas-crud-com-laravel-e-react
 $ composer install
 ````
 ````
-#configure seu banco de dados em .env.example
+#renomeie .env.example para.env e configure seu banco de dados
 ````
 ````
 #gere uma chave 
