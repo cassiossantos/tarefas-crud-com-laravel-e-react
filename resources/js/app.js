@@ -58,10 +58,9 @@ class App extends Component {
         });
     }
     editarTarefa(dados) {
+        const parametro = `titulo=${encodeURI(dados.titulo)}&corpo=${encodeURI(dados.corpo)}`
         fetch(
-            `api/tarefas/${dados.id}?titulo=${dados.titulo}&corpo=${
-                dados.corpo
-            }`,
+            `api/tarefas/${dados.id}?${parametro}`,
             {
                 method: "PUT"
             }
