@@ -380,7 +380,8 @@ var App = function (_Component) {
         value: function editarTarefa(dados) {
             var _this4 = this;
 
-            fetch("api/tarefas/" + dados.id + "?titulo=" + dados.titulo + "&corpo=" + dados.corpo, {
+            var parametro = "titulo=" + encodeURI(dados.titulo) + "&corpo=" + encodeURI(dados.corpo);
+            fetch("api/tarefas/" + dados.id + "?" + parametro, {
                 method: "PUT"
             }).then(function (res) {
                 return res.json();
