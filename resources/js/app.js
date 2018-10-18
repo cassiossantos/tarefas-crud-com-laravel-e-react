@@ -58,15 +58,16 @@ class App extends Component {
         });
     }
     editarTarefa(dados) {
-        const tarefa = new FormData();
-        tarefa.append("titulo", dados.titulo);
-        tarefa.append("corpo", dados.corpo);
-        fetch(`api/tarefas/${dados.id}`, {
-            method: "POST",
-            body: tarefa
-        })
+        fetch(
+            `api/tarefas/${dados.id}?titulo=${dados.titulo}&corpo=${
+                dados.corpo
+            }`,
+            {
+                method: "PUT"
+            }
+        )
             .then(res => res.json())
-            .catch(err => console.log(err))
+
             .then(dados => {
                 this.setState({
                     dados

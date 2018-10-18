@@ -380,16 +380,10 @@ var App = function (_Component) {
         value: function editarTarefa(dados) {
             var _this4 = this;
 
-            var tarefa = new FormData();
-            tarefa.append("titulo", dados.titulo);
-            tarefa.append("corpo", dados.corpo);
-            fetch("api/tarefas/" + dados.id, {
-                method: "POST",
-                body: tarefa
+            fetch("api/tarefas/" + dados.id + "?titulo=" + dados.titulo + "&corpo=" + dados.corpo, {
+                method: "PUT"
             }).then(function (res) {
                 return res.json();
-            }).catch(function (err) {
-                return console.log(err);
             }).then(function (dados) {
                 _this4.setState({
                     dados: dados

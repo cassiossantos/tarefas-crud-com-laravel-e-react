@@ -91,7 +91,7 @@ class TarefasController extends Controller
         $tarefa->titulo = $request->input('titulo');
         $tarefa->corpo = $request->input('corpo');
         $tarefa->save();
-        return json_encode(Tarefas::orderBy('created_at', 'desc')->get());
+        return (Tarefas::orderBy('created_at', 'desc')->get());
 
     }
 
