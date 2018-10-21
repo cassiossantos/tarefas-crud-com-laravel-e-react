@@ -4,8 +4,6 @@ import Form from "./componentes/formCriarNovaTarefa";
 import Tarefa from "./componentes/tarefa";
 import Modal from "./componentes/modal";
 
-//obs: são simples requests apenas para demonstrar a conexão entre o back-end e o front-end
-
 class App extends Component {
     constructor() {
         super();
@@ -15,14 +13,16 @@ class App extends Component {
                 dados: null
             },
             isLoading: true,
-            dados: []
+            dados: [],
+            TOKEN: document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content")
         };
         this.openModal = this.openModal.bind(this);
         this.lerTarefas = this.lerTarefas.bind(this);
         this.editarTarefa = this.editarTarefa.bind(this);
         this.deleteTarefa = this.deleteTarefa.bind(this);
     }
-    
     componentWillMount() {
         return this.lerTarefas();
     }
@@ -61,32 +61,36 @@ class App extends Component {
         });
     }
     editarTarefa(dados) {
-        const parametro = `titulo=${encodeURI(dados.titulo)}&corpo=${encodeURI(
-            dados.corpo
-        )}`;
-        fetch(`api/tarefas/${dados.id}?${parametro}`, {
-            method: "PUT"
+        const data = new FormData();
+        data.append("_token", this.state.TOKEN);
+        data.append("_method", "PUT");
+        data.append("id", dados.id);
+        data.append("titulo", dados.titulo);
+        data.append("corpo", dados.corpo);
+
+        fetch(`api/tarefas/${dados.id}`, {
+            method: "POST",
+            body: data
         })
             .then(res => res.json())
-
             .then(dados => {
-                this.setState({
-                    dados
-                });
                 const modal = this.state.modal;
-                modal.isOpen = false;
                 modal.dados = null;
+                modal.isOpen = false;
                 this.setState({
-                    modal
+                    dados: dados,
+                    modal: modal
                 });
             });
     }
 
     deleteTarefa(id) {
-        fetch(`api/tarefas/${id}/delete`, {
-            method: "DELETE"
+        const data = new FormData();
+        data.append("_method", "DELETE");
+        fetch(`api/tarefas/${id}`, {
+            method: "DELETE",
+            body: data
         });
-
         const dados = this.state.dados.filter(t => t.id != id);
         this.setState({
             dados

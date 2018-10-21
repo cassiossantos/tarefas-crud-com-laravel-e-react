@@ -20,4 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('tarefas', 'TarefasController@index');
 Route::post('/tarefas/create', 'TarefasController@store');
 Route::put('/tarefas/{id}', 'TarefasController@update');
-Route::delete('/tarefas/{id}/delete', 'TarefasController@destroy');
+Route::delete('/tarefas/{id}', 'TarefasController@destroy');

@@ -46,7 +46,7 @@ class TarefasController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        // //
         $tarefa = Tarefas::find($id);
         $tarefa->titulo = $request->input('titulo');
         $tarefa->corpo = $request->input('corpo');

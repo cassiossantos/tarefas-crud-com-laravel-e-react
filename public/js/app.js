@@ -321,7 +321,8 @@ var App = function (_Component) {
                 dados: null
             },
             isLoading: true,
-            dados: []
+            dados: [],
+            TOKEN: document.querySelector('meta[name="csrf-token"]').getAttribute("content")
         };
         _this.openModal = _this.openModal.bind(_this);
         _this.lerTarefas = _this.lerTarefas.bind(_this);
@@ -380,19 +381,24 @@ var App = function (_Component) {
         value: function editarTarefa(dados) {
             var _this4 = this;
 
-            var parametro = "titulo=" + encodeURI(dados.titulo) + "&corpo=" + encodeURI(dados.corpo);
-            fetch("api/tarefas/" + dados.id + "?" + parametro, {
-                method: "PUT"
+            var data = new FormData();
+            data.append("_token", this.state.TOKEN);
+            data.append("_method", "PUT");
+            data.append("id", dados.id);
+            data.append("titulo", dados.titulo);
+            data.append("corpo", dados.corpo);
+
+            fetch("api/tarefas/" + dados.id, {
+                method: "POST",
+                body: data
             }).then(function (res) {
                 return res.json();
             }).then(function (dados) {
-                _this4.setState({
-                    dados: dados
-                });
                 var modal = _this4.state.modal;
-                modal.isOpen = false;
                 modal.dados = null;
+                modal.isOpen = false;
                 _this4.setState({
+                    dados: dados,
                     modal: modal
                 });
             });
@@ -400,10 +406,12 @@ var App = function (_Component) {
     }, {
         key: "deleteTarefa",
         value: function deleteTarefa(id) {
-            fetch("api/tarefas/" + id + "/delete", {
-                method: "DELETE"
+            var data = new FormData();
+            data.append("_method", "DELETE");
+            fetch("api/tarefas/" + id, {
+                method: "DELETE",
+                body: data
             });
-
             var dados = this.state.dados.filter(function (t) {
                 return t.id != id;
             });
