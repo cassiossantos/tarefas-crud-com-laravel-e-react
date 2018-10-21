@@ -4,6 +4,8 @@ import Form from "./componentes/formCriarNovaTarefa";
 import Tarefa from "./componentes/tarefa";
 import Modal from "./componentes/modal";
 
+//obs: são simples requests apenas para demonstrar a conexão entre o back-end e o front-end
+
 class App extends Component {
     constructor() {
         super();
@@ -20,6 +22,7 @@ class App extends Component {
         this.editarTarefa = this.editarTarefa.bind(this);
         this.deleteTarefa = this.deleteTarefa.bind(this);
     }
+    
     componentWillMount() {
         return this.lerTarefas();
     }
